@@ -17,22 +17,15 @@ class MeshGradientPainter extends CustomPainter {
   ///
   /// The constructor asserts that there are between 2 and 6 points,
   /// and that the noise intensity and blend values are within their respective ranges.
-  MeshGradientPainter({
-    required this.shader,
-    required this.points,
-    required this.options,
-  }) {
+  MeshGradientPainter({required this.shader, required this.points, required this.options}) {
     // Ensure the points list contains between 2 and 6 points inclusive.
     assert(points.length <= 6, 'The number of points must not exceed 6.');
-    assert(points.length >= 2,
-        'There must be at least 2 points to define a mesh gradient.');
+    assert(points.length >= 2, 'There must be at least 2 points to define a mesh gradient.');
     // Validate the noise intensity is within the range [0, 1].
-    assert(
-        options.noiseIntensity >= 0, 'Noise intensity cannot be less than 0.');
+    assert(options.noiseIntensity >= 0, 'Noise intensity cannot be less than 0.');
     assert(options.noiseIntensity <= 1, 'Noise intensity cannot exceed 1.');
     // Ensure the blend option is within the range [0, 10].
-    assert(0 < options.blend && options.blend <= 10,
-        'Blend value needs to be larger than 0 and smaller than 10.');
+    assert(0 < options.blend && options.blend <= 10, 'Blend value needs to be larger than 0 and smaller than 10.');
   }
 
   /// The fragment shader used to render the gradient.
@@ -74,10 +67,7 @@ class MeshGradientPainter extends CustomPainter {
     }
 
     // Paint the rectangle covering the canvas with the gradient.
-    canvas.drawRect(
-      Rect.fromLTWH(0, 0, size.width, size.height),
-      Paint()..shader = shader,
-    );
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), Paint()..shader = shader);
   }
 
   @override

@@ -9,12 +9,7 @@ class AnimatedMeshGradientPainter extends CustomPainter {
   ///
   /// Requires a [FragmentShader] to apply the mesh gradient effect, a [double] value for time to animate the gradient,
   /// a list of [Color]s to define the gradient colors, and [AnimatedMeshGradientOptions] to customize the animation.
-  const AnimatedMeshGradientPainter({
-    required this.shader,
-    required this.time,
-    required this.colors,
-    required this.options,
-  });
+  const AnimatedMeshGradientPainter({required this.shader, required this.time, required this.colors, required this.options});
 
   /// The shader used to create the mesh gradient effect.
   final FragmentShader shader;
@@ -57,19 +52,13 @@ class AnimatedMeshGradientPainter extends CustomPainter {
     }
 
     // Draws the rectangle filled with the animated mesh gradient.
-    canvas.drawRect(
-      Rect.fromLTWH(0, 0, size.width, size.height),
-      Paint()..shader = shader,
-    );
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), Paint()..shader = shader);
   }
 
   @override
-
   /// Determines whether the painter should repaint.
   ///
   /// Returns true if the time, options, or colors have changed, triggering a repaint.
   bool shouldRepaint(covariant AnimatedMeshGradientPainter oldDelegate) =>
-      oldDelegate.time != time ||
-      oldDelegate.options != options ||
-      oldDelegate.colors != colors;
+      oldDelegate.time != time || oldDelegate.options != options || oldDelegate.colors != colors;
 }
