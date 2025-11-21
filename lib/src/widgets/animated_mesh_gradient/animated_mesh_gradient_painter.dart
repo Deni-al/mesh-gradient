@@ -52,6 +52,8 @@ class AnimatedMeshGradientPainter extends CustomPainter {
       i++;
       shader.setFloat(i, color.b);
       i++;
+      shader.setFloat(i, color.a);
+      i++;
     }
 
     // Draws the rectangle filled with the animated mesh gradient.

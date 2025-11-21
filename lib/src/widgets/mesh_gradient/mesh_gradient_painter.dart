@@ -70,6 +70,7 @@ class MeshGradientPainter extends CustomPainter {
       shader.setFloat(j++, color.r);
       shader.setFloat(j++, color.g);
       shader.setFloat(j++, color.b);
+      shader.setFloat(j++, color.a);
     }
 
     // Paint the rectangle covering the canvas with the gradient.

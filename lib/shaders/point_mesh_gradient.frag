@@ -11,12 +11,12 @@ uniform vec2 uPoint4;
 uniform vec2 uPoint5;
 uniform vec2 uPoint6;
 
-uniform vec3 uColor1;
-uniform vec3 uColor2;
-uniform vec3 uColor3;
-uniform vec3 uColor4;
-uniform vec3 uColor5;
-uniform vec3 uColor6;
+uniform vec4 uColor1;
+uniform vec4 uColor2;
+uniform vec4 uColor3;
+uniform vec4 uColor4;
+uniform vec4 uColor5;
+uniform vec4 uColor6;
 
 out vec4 fragColor;
 
@@ -59,7 +59,7 @@ vec2 normalizePoint(vec2 point) {
     return normalizedPoint;
 }
 
-void processPoint(vec2 point, vec3 color, vec2 uv, float blend, inout vec3 sum, inout float valence) {
+void processPoint(vec2 point, vec4 color, vec2 uv, float blend, inout vec4 sum, inout float valence) {
     // point = normalizePoint(point);
     float distance = length(uv - point);
     if (distance == 0.0) { distance = 1.0; }
@@ -72,7 +72,7 @@ void main(void) {
     vec2 uv = FlutterFragCoord().xy / uSize;
     float blend = uBlend;
 
-    vec3 sum = vec3(0.0);
+    vec4 sum = vec4(0.0);
     float valence = 0.0;
 
     // Directly pass the array elements
@@ -88,9 +88,9 @@ void main(void) {
     }
 
     float n = complexNoise(uv * uSize * 0.1);
-    sum = mix(sum, sum * n, (uNoiseIntensity * -1.0));
+    sum.rgb = mix(sum.rgb, sum.rgb * n, (uNoiseIntensity * -1.0));
 
-    sum = pow(sum, vec3(1.0/2.2));
+    sum.rgb = pow(sum.rgb, vec3(1.0/2.2));
 
-    fragColor = vec4(sum.xyz, 1.0);
+    fragColor = vec4(sum.rgb, sum.a);
 }

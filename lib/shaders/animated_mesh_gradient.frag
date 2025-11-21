@@ -10,10 +10,10 @@ uniform float uAmplitude;
 uniform float uSpeed;
 uniform float uGrain;
 
-uniform vec3 uColor1;
-uniform vec3 uColor2;
-uniform vec3 uColor3;
-uniform vec3 uColor4;
+uniform vec4 uColor1;
+uniform vec4 uColor2;
+uniform vec4 uColor3;
+uniform vec4 uColor4;
 
 out vec4 fragColor;
 
@@ -79,15 +79,15 @@ void main()
     
     
     // draw the image
-    vec3 layer1 = mix(uColor1, uColor2, S(-.3, .2, (tuv*Rot(radians(-5.))).x));
+    vec4 layer1 = mix(uColor1, uColor2, S(-.3, .2, (tuv*Rot(radians(-5.))).x));
     
-    vec3 layer2 = mix(uColor3, uColor4, S(-.3, .2, (tuv*Rot(radians(-5.))).x));
+    vec4 layer2 = mix(uColor3, uColor4, S(-.3, .2, (tuv*Rot(radians(-5.))).x));
     
-    vec3 finalComp = mix(layer1, layer2, S(.5, -.3, tuv.y));
+    vec4 finalComp = mix(layer1, layer2, S(.5, -.3, tuv.y));
 
-    vec3 grainedComp = vec3(finalComp + (finalComp * grainNoise(uv) * uGrain));
+    vec3 grainedComp = vec3(finalComp.rgb + (finalComp.rgb * grainNoise(uv) * uGrain));
 
     vec3 col = grainedComp; 
     
-    fragColor = vec4(col,1.0);
+    fragColor = vec4(col, finalComp.a);
 }
